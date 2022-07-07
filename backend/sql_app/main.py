@@ -1,9 +1,11 @@
 from datetime import date
 from importlib import reload
 from typing import Optional
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request, Form
+from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 import uvicorn
+from fastapi.templating import Jinja2Templates
 
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -22,6 +24,20 @@ def get_db():
         yield db
     finally:
         db.close()
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get('/form')
+def form_post(request: Request):
+    id = 'Type IPO ID'
+    return templates.TemplateResponse('ipo.html', context={'request': request, 'id': id})
+
+
+@app.post('/form')
+def form_post(request: Request, id: int = Form(...), db: Session = Depends(get_db)):
+    ipo = crud.get_ipo(db, id=id)
+    return templates.TemplateResponse('ipo.html', context={'request': request, 'company': ipo.company, 'open_date' : ipo.open_date, 'close_date' : ipo.close_date, 'lot_size' : ipo.lot_size, 'issue_price' : ipo.issue_price, 'cost_of_one_lot' : ipo.cost_of_one_lot})
+
 
 @app.get("/ipos/{id}", response_model=schemas.IPO)
 async def read_ipo(id: int, db: Session = Depends(get_db)):

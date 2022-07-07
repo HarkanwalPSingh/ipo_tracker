@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO Tracker</title>
+</head>
+<body>
+    <form method="post">
+        <input type="number" name="id" value="{{ id }}"/>
+        <input type="submit">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Open Date</th>
+                <th>Close Date</th>
+                <th>Lot Size</th>
+                <th>Issue Price</th>
+                <th>Cost of one lot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ company }}</td>
+                <td>{{ open_date }}</td>
+                <td>{{ close_date }}</td>
+                <td>{{ lot_size }}</td>
+                <td>{{ issue_price }}</td>
+                <td>{{ cost_of_one_lot }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
