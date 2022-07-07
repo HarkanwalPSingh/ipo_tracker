@@ -36,7 +36,10 @@ def form_post(request: Request):
 @app.post('/form')
 def form_post(request: Request, id: int = Form(...), db: Session = Depends(get_db)):
     ipo = crud.get_ipo(db, id=id)
-    return templates.TemplateResponse('ipo.html', context={'request': request, 'company': ipo.company, 'open_date' : ipo.open_date, 'close_date' : ipo.close_date, 'lot_size' : ipo.lot_size, 'issue_price' : ipo.issue_price, 'cost_of_one_lot' : ipo.cost_of_one_lot})
+    return templates.TemplateResponse('ipo.html', context={'request': request, 'company': ipo.company, \
+                                      'open_date' : ipo.open_date, 'close_date' : ipo.close_date, \
+                                      'lot_size' : ipo.lot_size, 'issue_price' : ipo.issue_price, \
+                                      'cost_of_one_lot' : ipo.cost_of_one_lot})
 
 
 @app.get("/ipos/{id}", response_model=schemas.IPO)
