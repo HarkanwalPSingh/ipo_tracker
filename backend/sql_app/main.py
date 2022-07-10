@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 import uvicorn
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -16,6 +17,7 @@ CURR_DATE = date.today()
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+app.mount('/static', StaticFiles(directory="static"), name="static")
 
 # Dependency
 def get_db():
@@ -26,6 +28,7 @@ def get_db():
         db.close()
 
 templates = Jinja2Templates(directory="templates")
+# static = StaticFiles(directory="static")
 
 @app.get('/form')
 def form_post(request: Request):

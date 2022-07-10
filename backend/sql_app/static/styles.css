@@ -1,0 +1,16 @@
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: chocolate;
+}
+
+table, th, tr, td {
+    border: 2px solid black;
+    border-style: solid;
+    background-color: bisque;
+    border-collapse: collapse;
+}
+
+table {
+    table-layout: auto;
+    width: 50%;
+}

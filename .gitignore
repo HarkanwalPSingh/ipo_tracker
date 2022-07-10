@@ -1,2 +1,6 @@
 # Virtual env
 .venv
+
+# Compiled files
+*.pyc
+*.DS_Store
